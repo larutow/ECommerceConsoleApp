@@ -17,10 +17,10 @@ namespace eComercePlatform
         public Platform()
         {
             inventory = new List<Product>();
-            inventory.Add(CreateProduct(1, "Blue Shoes", "Clothing", 49.99));
-            inventory.Add(CreateProduct(2, "PS5", "Videogames", 499.99));
-            inventory.Add(CreateProduct(3, "Pixel 4a", "Cellphones", 350.00));
-            inventory.Add(CreateProduct(4, "Infinite Jest", "Books", 14.99));
+            PopulateInventory(CreateProduct(1, "Blue Shoes", "Clothing", 49.99));
+            PopulateInventory(CreateProduct(2, "PS5", "Videogames", 499.99));
+            PopulateInventory(CreateProduct(3, "Pixel 4a", "Cellphones", 350.00));
+            PopulateInventory(CreateProduct(4, "Infinite Jest", "Books", 14.99));
         }
         //member methods (CAN DO)
 
@@ -63,8 +63,9 @@ namespace eComercePlatform
         {
             Console.WriteLine("Main Menu:");
             Console.WriteLine("1. Search for product");
-            Console.WriteLine("2. Account Information");
-            Console.WriteLine("3. Exit Application");
+            Console.WriteLine("2. Show Cart");
+            Console.WriteLine("3. Account Information");
+            Console.WriteLine("4. Exit Application");
             
         }
 
@@ -74,6 +75,33 @@ namespace eComercePlatform
             Console.WriteLine($"1. Add {foundProduct.name} To Cart");
             Console.WriteLine($"2. Leave a rating & review for {foundProduct.name}");
             Console.WriteLine($"3. Return to main menu");
+        }
+
+        public void DisplayCartMenu(Consumer consumer)
+        {
+            Console.WriteLine("Cart Menu:");
+            Console.WriteLine(/*consumer cart*/"Cart Contains:");
+            //show cart contents method?
+            Console.WriteLine("1. Delete Items In Cart");
+            Console.WriteLine("2. Check Out Items In Cart");
+            Console.WriteLine("3. Return to Main Menu");
+
+        }
+
+        public void DisplayAccountMenu(Consumer consumer)
+        {
+            Console.WriteLine("Account Menu:");
+            //State/context dependent menu:
+            //if new/not signed in user: create account
+            //if new/not signed in user: sign into an existing account
+            //if signed in user: sign out
+            //if signed in user: update account information
+            //if signed in user: delete account
+            //Console.WriteLine("1. Create an account");
+            //Console.WriteLine("2. Enter Email");
+            //Console.WriteLine("3. Account Information");
+            //Console.WriteLine("4. Exit Application");
+
         }
 
         public void SearchMenu(Consumer consumer)
@@ -116,46 +144,24 @@ namespace eComercePlatform
             }
         }
 
-        public void AccountMenu()
-        {
 
+        public void CartMenu(Consumer consumer)
+        {
+            //operations for consumer's cart
+
+        }
+        public void AccountMenu(Consumer consumer)
+        {
+            //operations consumer's account information
 
         }
 
         public void UsePlatform(Consumer consumer)
         {
-            /* From docs:
-             * The workflow consists of the following:
-                a. Search for product
-                b. See information about product
-                c. Add product to shopping cart
-                d. Give product a rating
-                e. Give product a review
-
-              I think the below is a good way to structure menu navigation
-            * Home Menu
-            * 1. Search
-            *   a. Find product
-            *       i.   see information
-            *       ii.  add to cart
-            *       iii. leave a rating
-            *       iv.  leave a review
-            *       v.   return to home
-            *   b. Not find product
-            *       i.   Search again?
-            *       ii.  Exit
-            * 2. Account Info
-            *   a. Update First Name
-            *   b. Update Last Name
-            *   c. Return to home
-            * 3. Exit
-            * 
-            * 
-            * I literally hate the below code but it works and I need to refactor it into clean submenus
-             */
+            
             Console.WriteLine("Welcome to C#azon");
             bool exit = false;
-            do 
+            do
             {
                 DisplayHomeMenu();
                 int userEntry = int.Parse(Console.ReadLine());
@@ -164,26 +170,22 @@ namespace eComercePlatform
                     case 1:
                         SearchMenu(consumer);
                         break;
-
                     case 2:
-                        //do account things here
+                        //cart menu
+                        CartMenu(consumer);
                         break;
                     case 3:
+                        AccountMenu(consumer);
+                        break;
+                    case 4:
                         exit = true;
                         break;
 
                     default:
                         exit = true;
                         break;
-                }    
+                }
             } while (exit == false);
-            //show menu
-            //control
-
         }
-
-
-
-
     }
 }
